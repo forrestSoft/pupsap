@@ -2,11 +2,11 @@ import React, {useState} from 'react'
 
 const Input = (props) => {
   const Type='input'
-  console.log(props)
+  console.log(props.name,props.value)
   return(
     <div>
       <label htmlFor={props.name}>{props.name}</label>
-      <Type {...props} />
+      <Type {...props} key={null}/>
     </div>
   )
 } 
@@ -14,64 +14,38 @@ const Input = (props) => {
 export function To(props){
   return(
     <React.Fragment>
-      <Input 
-        name={'name'} 
-        onChange={props.onChange}
-        label={props.name}
-        value={props.name}
-      />
-      <Input 
-        name={'street'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'city'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'state'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'zip'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
+    { Object.keys(props.wizardContext.to).map( (name,l)=>{
+    	console.log(props,props.wizardContext.to[name])
+    	return(
+				<Input 
+	        name={name} 
+	        onChange={props.onChange}
+	        label={props.name}
+	        value={props.wizardContext.to[name]}
+	        key={name}
+	      />
+  		)
+    })}
     </React.Fragment>
   )
 }
 
 export function From(props)  {
+	// debugger
   return(
     <React.Fragment>
-      <Input 
-        name={'name'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'street'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'city'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'state'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
-      <Input 
-        name={'zip'} 
-        onChange={props.onChange} 
-        label={props.name}
-      />
+      { Object.keys(props.wizardContext.from).map( (name,l)=>{
+    	console.log(props,props.wizardContext.to[name])
+    	return(
+				<Input 
+	        name={name} 
+	        onChange={props.onChange}
+	        label={props.name}
+	        value={props.wizardContext.from[name]}
+	        key={name}
+	      />
+  		)
+    })}
     </React.Fragment>
   )
 }

@@ -8,8 +8,8 @@ import wizardData from 'features/shipping-label-maker/wizard-data-template'
 import './app.scss'
 
 let steps=[]
-steps.push(WithWizardView(WithWizardControls(Step), To, 'from'))
-steps.push(WithWizardView(WithWizardControls(Step), From, 'to'))
+steps.push(WithWizardView(WithWizardControls(Step), To, 'to'))
+steps.push(WithWizardView(WithWizardControls(Step), From, 'from'))
 steps.push(WithWizardView(WithWizardControls(Step), Weight, 'weight'))
 steps.push(WithWizardView(WithWizardControls(Step), Options, 'options'))
 steps.push(WithWizardView(WithWizardControls(Step), Confirm, null))

@@ -7,7 +7,7 @@ export default () => ({
     zip: ""
   },
   to: {
-    name: "",
+    name: "aaa",
     street: "",
     city: "",
     state: "",

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 // import Step from 'features/shipping-label-maker/step'
 import WizardAction from 'constants'
 
-const ProgressBar = () => {
-	return(<div>bp</div>)
+const ProgressBar = (i) => {
+	return(<div>bp{i}</div>)
 }
 
 class Wizard extends Component {
@@ -13,16 +13,13 @@ class Wizard extends Component {
 		totalSteps: this.props.steps.length
 	}
 	onAction = (action) => {
-		console.log('action', action, this.state)
 		switch(action){
 			case 0:
 				this.changeStep(-1)
-				// this.setState( prevState =>({currentStep: prevState.currentStep - 1 || prevState.currentStep}))
 			break
 
 			case 1:
 				this.changeStep(1)
-				// this.setState( prevState =>({currentStep: prevState.currentStep + 1 || prevState.currentStep}))
 			break
 
 			case 2:
@@ -32,6 +29,7 @@ class Wizard extends Component {
 				debugger
 		}
 	}
+
 	changeStep = (direction) => {
 		let {currentStep, totalSteps} = this.state
 		let next = (currentStep + direction)
@@ -39,29 +37,24 @@ class Wizard extends Component {
 		this.setState({
 			currentStep: [...Array(totalSteps).keys()].includes(next) ? next : currentStep
 		})
-		// this.render()
 	}
-	onChange(e){
-		console.log('fieeld',e.target.name)
-	}
+
 	render(){
   	const CurrentStep = this.props.steps[this.state.currentStep]
+  	// debugger
 	  return (
 	  	<React.Fragment>
 		  	{this.props.header()}
-		  	{ProgressBar()}
+		  	{ProgressBar(this.state.currentStep)}
 		    <CurrentStep
 		    	wizardContext={this.props.wizardContext}
 		    	onAction={this.onAction}
-		    	onChange={this.onChange}
 		    />
 		    {this.state.currentStep}
 	    </React.Fragment>
 	  )
 	}
 }
-
-
 
 Wizard.propTypes = {
 	header: PropTypes.func.isRequired,
