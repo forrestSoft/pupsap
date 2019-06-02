@@ -2,20 +2,27 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 
 class Step extends Component {
-  state = {...this.props.wizardContext[this.props.name]}
-  prev(){}
-  next(){}
-  done(){}
-  onChange(e){
-    this.setState({[e.target.name]: e.target.value})
-    this.props.wizardContext[this.props.name][e.target.name] = e.target.value
-    debugger
+  constructor(props){
+    super(props)
+    console.log(this.state, props)
   }
+  state = {...this.props.wizardContext[this.props.name]}
+  
+  onChange(e){
+    let {wizardContext, name}=this.props
+    this.setState({[e.target.name]: e.target.value})
+    typeof wizardContext[name] == "object" ? (wizardContext[name][e.target.name] = e.target.value) : (wizardContext[name] = e.target.value)
+    // debugger
+  }
+
   render(){
+    // debugger
     const children = React.Children.map(this.props.children, child => {
       // debugger
+      console.log(child)
       return React.cloneElement(child, {
-        onChange: this.onChange.bind(this)
+        onChange: this.onChange.bind(this),
+        value: this.state[child.name]
       });
     });
     return (

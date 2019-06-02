@@ -26,7 +26,7 @@ class Wizard extends Component {
 			break
 
 			case 2:
-				this.props.onComplete()
+				this.props.onComplete(this.props.wizardContext)
 			break
 			default:
 				debugger

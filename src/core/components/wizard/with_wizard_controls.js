@@ -30,10 +30,11 @@ export function WithWizardControls(WrappedComponent){
 export function WithWizardView(WrappedComponent, RenderProps, name){
   return class extends Component{
     render(){ 
+    console.log(name)
       return (
         <React.Fragment>
           <WrappedComponent {...this.props} name={name}>
-            <RenderProps {...this.props} onChange={this.props.onChange}/>
+            <RenderProps {...this.props} onChange={this.props.onChange} blah={123}/>
           </WrappedComponent>
         </React.Fragment>
       )

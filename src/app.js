@@ -8,7 +8,6 @@ import wizardData from 'features/shipping-label-maker/wizard-data-template'
 import './app.scss'
 
 let steps=[]
-
 steps.push(WithWizardView(WithWizardControls(Step), To, 'from'))
 steps.push(WithWizardView(WithWizardControls(Step), From, 'to'))
 steps.push(WithWizardView(WithWizardControls(Step), Weight, 'weight'))
@@ -17,19 +16,31 @@ steps.push(WithWizardView(WithWizardControls(Step), Confirm, null))
 
 
 class App extends Component {
-  state = {...wizardData()}
+  state = {
+    wizardOpen: false,
+    wizardContext: wizardData()
+  }
   
-  onChange(e){
-    this.setState({[e.target.name]: e.target.value})
+  // onChange(e){
+  //   this.setState({[e.target.name]: e.target.value})
+  // }
+  onClick = () => {
+    this.setState((prevState)=>({wizardOpen: !prevState.wizardOpen}))
+    console.log(10)
+  }
+  onComplete = (context) => {
+    this.setState({wizardContext: context})
+    console.log(this.state)
   }
   render(){
     return (
       <div className='app'>
+        <button onClick={this.onClick}>Create Shipping Label</button>
         <Wizard 
           header={header}
           steps={steps}
-          wizardContext={ wizardData() }
-          onComplete={()=>{console.log('complete that doesnt do anything')}}
+          wizardContext={ this.state.wizardContext }
+          onComplete={this.onComplete}
         />
       </div>
     )

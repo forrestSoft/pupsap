@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 
 const Input = (props) => {
   const Type='input'
+  console.log(props)
   return(
     <div>
       <label htmlFor={props.name}>{props.name}</label>
