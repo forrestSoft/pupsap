@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
-
+import Container from '@material-ui/core/Container';
 class Step extends Component {
   constructor(props){
     super(props)
@@ -11,22 +11,26 @@ class Step extends Component {
   onChange(e){
     let {wizardContext, stepName}=this.props
     let {name,value} = e.target
-    typeof wizardContext[stepName] == "object" ? (wizardContext[stepName][name] = value) : (wizardContext[stepName] = value)
+
+    typeof wizardContext[stepName] == "object" ? 
+      (wizardContext[stepName][name] = value) : 
+      (wizardContext[stepName] = value)
+
     this.setState((prevState)=>{
       return ({[name]: value})
     })
   }
 
   render(){
-    // debugger
     const children = React.Children.map(this.props.children, child => {
       return (React.cloneElement(child, {
         onChange: this.onChange,
         ...this.props.wizardContext[this.props.stepName]
-      }));
-    });
+      }))
+    })
+
     return (
-      <div>{children}</div>
+      <Container>{children}</Container>
     )
   }
 }
